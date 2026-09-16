@@ -41,3 +41,22 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+
+# Credentials, private keys, local service state, and scan reports
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+.npmrc
+.netrc
+.pypirc
+auth.json
+credentials.json
+.ssh/
+.codex/
+.sites-runtime/
+*.sqlite
+*.sqlite3
+*.db
+gitleaks-report*.json
