@@ -1,0 +1,528 @@
+/* Shared reading surfaces. The canvas-specific layout stays in globals.css. */
+[hidden] {
+  display: none !important;
+}
+:focus-visible {
+  outline: 2px solid var(--lacquer);
+  outline-offset: 5px;
+}
+.skip-link {
+  position: fixed;
+  top: -80px;
+  left: 20px;
+  z-index: 100;
+  padding: 12px;
+  background: var(--paper);
+}
+.skip-link:focus {
+  top: 12px;
+}
+.masthead nav a {
+  color: var(--ink-soft);
+}
+.page-footer a {
+  justify-self: center;
+  color: inherit;
+  text-decoration: none;
+}
+body.content-mode {
+  overflow: auto;
+}
+.content-mode .masthead {
+  background: rgba(232, 223, 201, 0.96);
+  border-bottom: 1px solid var(--line);
+}
+.content-page {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 155px clamp(24px, 5.8vw, 100px) 80px;
+}
+.section-heading {
+  padding-bottom: 60px;
+}
+.eyebrow {
+  font: 12px/1.6 var(--utility);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-soft);
+}
+.section-heading h1 {
+  margin: 18px 0 24px;
+  font: 400 clamp(52px, 6vw, 90px) / 0.98 var(--display);
+  letter-spacing: -0.035em;
+}
+.section-heading h1 em {
+  font-weight: 400;
+  color: var(--lacquer);
+}
+.section-description {
+  max-width: 600px;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.8;
+}
+.destination-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 56px 44px;
+}
+.destination-card {
+  border-top: 1px solid var(--line);
+}
+.destination-card__top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 0;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+.destination-art {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  min-height: 180px;
+  height: clamp(180px, 20vw, 260px);
+  padding: 12px 24px;
+}
+.destination-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  transition: transform 240ms ease;
+}
+.destination-art:hover img {
+  transform: translateY(-5px);
+}
+.destination-card__body {
+  padding: 24px 0;
+}
+.destination-card__body h2 {
+  font: 400 48px/1 var(--display);
+  margin: 12px 0 18px;
+}
+.destination-card__body > p:not(.eyebrow) {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--ink-soft);
+  min-height: 84px;
+}
+.text-link {
+  display: inline-flex;
+  gap: 28px;
+  align-items: center;
+  padding: 12px 0;
+  font-size: 14px;
+  text-decoration: none;
+  border-bottom: 1px solid var(--ink);
+}
+.text-link:hover {
+  color: var(--lacquer);
+  border-color: var(--lacquer);
+}
+.editorial-callout {
+  margin-top: 70px;
+  padding: 45px 0;
+  border-top: 1px solid var(--line);
+}
+.editorial-callout h2 {
+  font: 400 clamp(38px, 4vw, 58px) / 1.1 var(--display);
+  margin: 16px 0;
+}
+.editorial-callout > p:not(.eyebrow) {
+  max-width: 560px;
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.8;
+}
+.content-mode .page-footer {
+  position: static;
+  margin: 0 clamp(24px, 5.8vw, 110px);
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+  font-size: 10px;
+  gap: 20px;
+}
+.community-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
+  gap: clamp(40px, 6vw, 90px);
+  align-items: start;
+}
+.note-composer {
+  border-top: 3px solid var(--lacquer);
+  padding-top: 18px;
+}
+.note-composer h2 {
+  font: 400 40px/1.05 var(--display);
+  margin: 16px 0 30px;
+}
+#communityForm {
+  display: flex;
+  flex-direction: column;
+}
+#communityForm label {
+  font-size: 13px;
+  margin: 20px 0 9px;
+}
+#communityForm label:first-child {
+  margin-top: 0;
+}
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  padding: 12px;
+  background: rgba(255, 252, 242, 0.45);
+  color: var(--ink);
+  font: 14px/1.6 var(--body);
+}
+textarea {
+  resize: vertical;
+  min-height: 145px;
+}
+input::placeholder,
+textarea::placeholder {
+  color: #756b5e;
+}
+.field-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 8px 0 20px;
+  color: var(--ink-soft);
+  font-size: 10px;
+  line-height: 1.6;
+}
+.solid-button,
+.outline-button {
+  padding: 14px 18px;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid var(--ink);
+}
+.solid-button {
+  background: var(--ink);
+  color: var(--paper);
+  display: flex;
+  justify-content: space-between;
+}
+.solid-button:hover {
+  background: var(--lacquer);
+  border-color: var(--lacquer);
+}
+.outline-button {
+  background: transparent;
+  margin-top: 24px;
+}
+button:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+.form-status {
+  min-height: 22px;
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 12px 0 0;
+}
+.form-status[data-error="true"] {
+  color: var(--lacquer);
+}
+.composer-footnote {
+  color: var(--ink-soft);
+  font-size: 11px;
+  line-height: 1.7;
+  margin-top: 20px;
+}
+.notes-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+.notes-toolbar h2 {
+  font: 400 34px/1.1 var(--display);
+  margin: 0;
+}
+.quiet-button {
+  border: 0;
+  background: transparent;
+  color: var(--ink-soft);
+  padding: 12px 0;
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.country-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 24px 0;
+}
+.country-filters button {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink-soft);
+  padding: 8px 11px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.country-filters button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.board-status {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1.8;
+}
+.board-status:not(:empty) {
+  border-block: 1px solid var(--line);
+  padding: 32px 0;
+}
+.note-card {
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+}
+.note-card__meta {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: var(--ink-soft);
+  font-size: 11px;
+}
+.note-card__place {
+  color: var(--lacquer);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.note-card__message {
+  font-size: 16px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.note-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.note-card__name {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.noscript-note {
+  position: fixed;
+  inset: 100px 24px auto;
+  padding: 20px;
+  background: var(--paper);
+  z-index: 90;
+}
+@media (max-width: 900px) {
+  .community-layout {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+  .note-composer {
+    max-width: 600px;
+  }
+}
+@media (max-width: 700px) {
+  .masthead {
+    row-gap: 18px;
+    padding: 16px 22px;
+    background: rgba(232, 223, 201, 0.96);
+  }
+  .masthead nav {
+    display: flex;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin: 0;
+    gap: 28px;
+    font-size: 12px;
+  }
+  .configure-button {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .content-page {
+    padding-top: 145px;
+    padding-bottom: 40px;
+  }
+  .section-heading {
+    padding-bottom: 40px;
+  }
+  .section-heading h1 {
+    font-size: 52px;
+  }
+  .destination-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .destination-art {
+    height: 210px;
+  }
+  .destination-card__body > p:not(.eyebrow) {
+    min-height: 0;
+  }
+  .content-mode .page-footer {
+    grid-template-columns: 1fr;
+  }
+  .page-footer a {
+    display: none;
+  }
+  .gallery-intro {
+    top: 125px;
+  }
+  .gallery-track {
+    top: 225px;
+  }
+  .story-panel {
+    top: 125px;
+    bottom: auto;
+  }
+  .story-panel__eyebrow {
+    font-size: 10px;
+    margin-bottom: 10px;
+  }
+  .story-panel h1 {
+    font-size: 42px;
+  }
+  .story-panel h1 .title-line:not(:first-child),
+  .story-panel h1 .title-line:first-child::after {
+    display: none;
+  }
+  .main-visual {
+    top: 200px;
+    width: 78vw;
+  }
+  .main-roof {
+    height: 115px;
+  }
+  .country-card {
+    top: 238px;
+  }
+  .story-footnote {
+    bottom: 48px;
+    left: 24px;
+    right: 24px;
+    width: auto;
+    font-size: 11px;
+  }
+}
+
+/* Language controls stay available on every view, including narrow screens. */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.language-picker select {
+  width: auto;
+  min-width: 98px;
+  padding: 7px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  background: transparent;
+  border-color: var(--line);
+  cursor: pointer;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+html:lang(zh-CN) {
+  --display: "Noto Serif SC", "Songti SC", serif;
+  --body: "PingFang SC", "Microsoft YaHei", sans-serif;
+  --utility: var(--body);
+}
+html:lang(ja-JP) {
+  --display: "Noto Serif JP", "Yu Mincho", serif;
+  --body: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  --utility: var(--body);
+}
+html:not(:lang(en)) .section-heading h1 {
+  font-size: clamp(34px, 4.2vw, 64px);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+html:not(:lang(en)) .story-panel h1 {
+  font-size: clamp(24px, 2.5vw, 44px);
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+}
+html:not(:lang(en)) .story-panel h1 .title-line:first-child::after {
+  display: none;
+}
+html:not(:lang(en)) .country-card__name {
+  font-size: 12px;
+  line-height: 1.35;
+}
+html:not(:lang(en)) .gallery-intro h2 {
+  font-size: clamp(26px, 2.8vw, 42px);
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+html:not(:lang(en)) .gallery-tower__label strong {
+  font-size: clamp(19px, 2.1vw, 30px);
+  line-height: 1.5;
+}
+html:not(:lang(en)) .note-composer h2 {
+  font-size: 30px;
+  line-height: 1.5;
+}
+html:not(:lang(en)) .destination-card__body h2 {
+  font-size: 38px;
+  line-height: 1.4;
+}
+html:not(:lang(en)) .editorial-callout h2 {
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.5;
+}
+@media (max-width: 700px) {
+  .header-actions {
+    grid-column: 2;
+    grid-row: 1;
+    gap: 8px;
+  }
+  .header-actions .configure-button {
+    min-width: 80px;
+    font-size: 13px;
+    padding-inline: 10px;
+  }
+  .language-picker select {
+    min-width: 86px;
+    padding-inline: 6px;
+  }
+  html:not(:lang(en)) .story-panel h1 {
+    font-size: 34px;
+  }
+  html:not(:lang(en)) .gallery-intro {
+    top: 116px;
+  }
+  html:not(:lang(en)) .gallery-intro h2 {
+    font-size: 24px;
+  }
+  html:not(:lang(en)) .gallery-tower__label strong {
+    font-size: 19px;
+  }
+  html:not(:lang(en)) .section-heading h1 {
+    font-size: 34px;
+  }
+}

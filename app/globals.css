@@ -1,0 +1,668 @@
+:root {
+  --paper: #e8dfc9;
+  --paper-deep: #d6c9ad;
+  --ink: #271f19;
+  --ink-soft: #62594e;
+  --lacquer: #8f211c;
+  --gold: #c98b24;
+  --line: rgba(47, 38, 29, 0.34);
+  --display: "Instrument Serif", "Bodoni 72", "Iowan Old Style", serif;
+  --body: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+  --utility: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  overflow: hidden;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 51% 42%, rgba(255, 252, 235, 0.45), transparent 33%),
+    linear-gradient(115deg, var(--paper) 0%, #efe7d4 49%, #ded3bb 100%);
+  font-family: var(--body);
+  cursor: default;
+}
+
+body.cloth-hover,
+body.cloth-hover * {
+  cursor: none !important;
+}
+
+button,
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--lacquer);
+  outline-offset: 4px;
+}
+
+.paper-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.38'/%3E%3C/svg%3E");
+}
+
+.masthead {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  width: 100%;
+  padding: 28px clamp(26px, 5.8vw, 110px);
+  font-size: 13px;
+}
+
+.wordmark {
+  position: relative;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+.wordmark::after {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 14px);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--lacquer);
+  content: "";
+}
+
+.masthead nav {
+  display: flex;
+  gap: 26px;
+  margin-left: 50px;
+}
+
+.masthead nav a {
+  position: relative;
+  text-decoration: none;
+  color: rgba(39, 31, 25, 0.45);
+  transition: color 180ms ease;
+}
+
+.masthead nav a:hover,
+.masthead nav a.is-active {
+  color: var(--ink);
+}
+
+.masthead nav a:not(:last-child)::after {
+  position: absolute;
+  right: -15px;
+  content: "·";
+  color: rgba(39, 31, 25, 0.24);
+}
+
+.configure-button {
+  position: relative;
+  min-width: 105px;
+  padding: 9px 16px 8px;
+  overflow: hidden;
+  border: 0;
+  color: #f4ecd9;
+  background: var(--ink);
+  font-family: var(--display);
+  font-size: 15px;
+  cursor: pointer;
+  clip-path: polygon(2% 8%, 98% 0, 100% 91%, 4% 100%);
+  transition: color 220ms ease;
+}
+
+.configure-button::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--lacquer);
+  transform: translateY(102%);
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  content: "";
+}
+
+.configure-button:hover::before,
+.configure-button[aria-pressed="true"]::before {
+  transform: translateY(0);
+}
+
+.detail-view,
+.gallery-view {
+  position: fixed;
+  inset: 0;
+  will-change: opacity, transform;
+}
+
+.story-panel {
+  position: absolute;
+  bottom: 12.5vh;
+  left: clamp(28px, 5.8vw, 110px);
+  z-index: 8;
+  width: min(25vw, 430px);
+}
+
+.story-panel__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin: 0 0 18px;
+  font-family: var(--utility);
+  font-size: clamp(9px, 0.7vw, 12px);
+  line-height: 1.3;
+  letter-spacing: -0.03em;
+}
+
+.story-panel__eyebrow::before {
+  width: 6px;
+  height: 6px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  content: "";
+}
+
+.story-panel h1 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(42px, 4.2vw, 76px);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+}
+
+.story-panel h1 .title-line {
+  display: block;
+}
+
+.story-panel h1 .title-line:first-child::after {
+  display: inline-block;
+  width: clamp(45px, 5.5vw, 105px);
+  height: 1px;
+  margin: 0 0 0.22em 16px;
+  vertical-align: middle;
+  background: currentColor;
+  content: "";
+}
+
+.story-footnote {
+  position: absolute;
+  right: clamp(28px, 8vw, 150px);
+  bottom: 13vh;
+  z-index: 8;
+  width: min(19vw, 300px);
+  margin: 0;
+  font-family: var(--utility);
+  font-size: clamp(9px, 0.72vw, 12px);
+  line-height: 1.48;
+}
+
+.main-visual {
+  position: absolute;
+  top: 8.5vh;
+  left: 50%;
+  z-index: 6;
+  width: min(54vw, 960px);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.main-roof {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: clamp(180px, 27vh, 300px);
+  filter: saturate(0.84) contrast(0.98);
+}
+
+.main-roof .roof-image,
+.country-card__art .roof-image,
+.gallery-roof .roof-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.country-card {
+  position: absolute;
+  top: 34%;
+  z-index: 12;
+  display: grid;
+  grid-template-rows: 35px auto auto;
+  place-items: center;
+  width: 86px;
+  min-height: 96px;
+  padding: 10px 8px 8px;
+  border: 1px solid var(--line);
+  background: rgba(238, 230, 211, 0.27);
+  cursor: pointer;
+  transition:
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 300ms ease;
+}
+
+.country-card::before,
+.country-card::after {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  content: "";
+}
+
+.country-card::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--ink);
+  border-left: 2px solid var(--ink);
+}
+
+.country-card::after {
+  right: -1px;
+  bottom: -1px;
+  border-right: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+
+.country-card:hover {
+  background: rgba(255, 250, 235, 0.62);
+  transform: translateY(-5px);
+}
+
+.country-card--previous {
+  left: clamp(24px, 5.8vw, 110px);
+}
+
+.country-card--next {
+  right: clamp(24px, 5.8vw, 110px);
+}
+
+.country-card__art {
+  display: block;
+  width: 54px;
+  height: 34px;
+}
+
+.country-card__art .roof-image {
+  filter: saturate(0.68) contrast(0.94);
+}
+
+.country-card__name {
+  font-family: var(--display);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.country-card__direction {
+  margin-top: 6px;
+  color: var(--ink-soft);
+  font-family: var(--utility);
+  font-size: 7px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+#clothCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  contain: strict;
+  will-change: opacity, transform;
+  transform: translateZ(0);
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  transition: opacity 250ms ease;
+}
+
+.cloth-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  width: 27px;
+  height: 27px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(-100px, -100px, 0);
+  transition: opacity 140ms ease;
+}
+
+.cloth-cursor.is-visible {
+  opacity: 1;
+}
+
+.cloth-cursor::before,
+.cloth-cursor span {
+  position: absolute;
+  border-radius: 50%;
+  content: "";
+}
+
+.cloth-cursor::before {
+  inset: -7px;
+  border: 1px solid rgba(39, 31, 25, 0.23);
+}
+
+.cloth-cursor span {
+  inset: 1px;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  background:
+    radial-gradient(circle at 34% 28%, #fff 0 5%, #a6a49e 12%, #f4f0e5 25%, #5a5956 49%, #d9d5cb 64%, #343331 100%);
+  box-shadow:
+    0 4px 7px rgba(28, 23, 19, 0.3),
+    inset -3px -3px 5px rgba(0, 0, 0, 0.35);
+}
+
+.interaction-note {
+  position: fixed;
+  bottom: 42px;
+  left: 50%;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(39, 31, 25, 0.62);
+  font-family: var(--utility);
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  transform: translateX(-50%);
+  transition: opacity 400ms ease;
+}
+
+.interaction-note__mark {
+  font-size: 17px;
+}
+
+.page-footer {
+  position: fixed;
+  right: clamp(28px, 5.8vw, 110px);
+  bottom: 20px;
+  left: clamp(28px, 5.8vw, 110px);
+  z-index: 9;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
+  color: rgba(39, 31, 25, 0.57);
+  font-family: var(--utility);
+  font-size: 7px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.page-footer span:nth-child(2) {
+  justify-self: center;
+}
+
+.page-footer span:last-child {
+  justify-self: end;
+}
+
+.gallery-view {
+  z-index: 7;
+  display: none;
+  opacity: 0;
+}
+
+.gallery-view.is-active {
+  display: block;
+  opacity: 1;
+}
+
+.gallery-open .interaction-note {
+  display: none;
+}
+
+.gallery-intro {
+  position: absolute;
+  top: clamp(90px, 13vh, 150px);
+  left: clamp(28px, 5.8vw, 110px);
+  z-index: 8;
+}
+
+.gallery-intro p {
+  margin: 0 0 12px;
+  font-family: var(--utility);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.gallery-intro h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(32px, 3.2vw, 52px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.055em;
+}
+
+.gallery-track {
+  position: absolute;
+  top: clamp(190px, 29vh, 265px);
+  right: clamp(24px, 5.8vw, 110px);
+  bottom: 64px;
+  left: clamp(24px, 5.8vw, 110px);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 3vw, 48px);
+}
+
+.gallery-tower {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  appearance: none;
+  text-align: center;
+  cursor: pointer;
+}
+
+.gallery-roof {
+  position: relative;
+  display: block;
+  flex: 0 0 auto;
+  z-index: 4;
+  width: 100%;
+  height: clamp(90px, 16vh, 180px);
+  filter: saturate(0.78) contrast(0.96);
+}
+
+.gallery-cloth-space {
+  display: block;
+  flex: 1 1 0;
+  min-height: 32px;
+  max-height: 350px;
+  width: 100%;
+  cursor: grab;
+  touch-action: none;
+}
+
+.gallery-tower__label {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  width: 100%;
+  margin-top: 16px;
+  font-family: var(--utility);
+  font-size: 12px;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.gallery-tower__label strong {
+  margin-bottom: 3px;
+  font-family: var(--display);
+  font-size: clamp(24px, 2.4vw, 34px);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: -0.04em;
+}
+
+@media (max-width: 700px) {
+  body {
+    overflow-y: auto;
+  }
+
+  .masthead {
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+    padding: 20px 22px;
+  }
+
+  .masthead nav {
+    display: none;
+  }
+
+  .configure-button {
+    justify-self: end;
+  }
+
+  .main-visual {
+    top: 10vh;
+    width: 82vw;
+  }
+
+  .main-roof {
+    height: clamp(150px, 22vh, 210px);
+  }
+
+  .story-panel {
+    bottom: 13vh;
+    left: 24px;
+    width: 72vw;
+  }
+
+  .story-panel h1 {
+    font-size: clamp(44px, 12vw, 68px);
+  }
+
+  .story-footnote {
+    right: 24px;
+    bottom: 8vh;
+    width: 45vw;
+    opacity: 0.78;
+  }
+
+  .country-card {
+    top: 42%;
+    width: 66px;
+    min-height: 78px;
+  }
+
+  .country-card--previous {
+    left: 14px;
+  }
+
+  .country-card--next {
+    right: 14px;
+  }
+
+  .country-card__direction {
+    display: none;
+  }
+
+  .page-footer span:nth-child(2),
+  .page-footer span:last-child {
+    display: none;
+  }
+
+  .gallery-intro {
+    top: 80px;
+    left: 22px;
+  }
+
+  .gallery-intro p {
+    margin-bottom: 6px;
+  }
+
+  .gallery-intro h2 {
+    font-size: 30px;
+  }
+
+  .gallery-track {
+    top: 182px;
+    right: 22px;
+    bottom: 46px;
+    left: 22px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 20px 24px;
+  }
+
+  .gallery-roof {
+    height: clamp(48px, 9vh, 84px);
+  }
+
+  .gallery-tower__label {
+    margin-top: 8px;
+    font-size: 10px;
+  }
+
+  .gallery-tower__label strong {
+    font-size: 24px;
+  }
+}
+
+@media (max-height: 820px) and (min-width: 701px) {
+  .story-panel {
+    bottom: 8vh;
+  }
+
+  .story-panel h1 {
+    font-size: clamp(38px, 6.2vh, 52px);
+  }
+
+  .country-card {
+    top: 21vh;
+  }
+
+  .story-footnote {
+    bottom: 9vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .interaction-note {
+    display: none;
+  }
+}
