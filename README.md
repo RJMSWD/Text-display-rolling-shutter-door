@@ -1,21 +1,33 @@
 # Budarina — Tactile Atlas
 
+**English** | [简体中文](README.zh-CN.md)
+
 An interactive architectural atlas with four language curtains and a shared travel notebook.
 
-[打开在线体验 / Open the live site](https://budarina-tactile-atlas.qingyan.chatgpt.site/) · Published by **RJMSWD**
+[Open the live site](https://budarina-tactile-atlas.qingyan.chatgpt.site/) · Published by **RJMSWD**
 
 Includes English, 简体中文, and 日本語 interfaces, interactive cloth typography, four destination pages, and a public shared notebook.
 
-## 在线体验 / Live experience
+## Live experience
 
-**[点击这里直接使用 Budarina](https://budarina-tactile-atlas.qingyan.chatgpt.site/)**，无需下载或安装。
+**[Open Budarina](https://budarina-tactile-atlas.qingyan.chatgpt.site/)** — no download or installation required.
 
-- **Home / 首页**：移动鼠标或触摸文字帘，感受文字的摆动；可以切换国家，或打开四国总览。
-- **Destinations / 目的地**：浏览越南、中国、日本、哈萨克斯坦的介绍，进入各自的文字帘。
-- **Community / 旅行社区**：阅读或发布公开旅行手记，按国家筛选，并从发布时使用的浏览器删除自己的手记。
-- **语言切换**：右上角可选择 English、中文、日本語，网站会记住你的选择。
+- **Home:** move the pointer or touch the text curtain, switch countries, or open the four-country overview.
+- **Destinations:** explore Vietnam, China, Japan, and Kazakhstan, then enter each country's text curtain.
+- **Community:** read and publish public travel notes, filter by country, and remove your own notes from the browser used to publish them.
+- **Languages:** switch between English, Chinese, and Japanese using the header selector. Your choice is remembered.
 
-Open the live site above to try the interactive curtains, explore all four destinations, and read or publish shared travel notes. No installation or email is required. Use the language selector in the header to switch between English, Chinese, and Japanese. This repository contains the source code; the link above opens the working application.
+The repository contains the source code; the live link opens the working application, including the shared notebook.
+
+## Screenshots
+
+### Home — interactive text curtain
+
+![Budarina home with Chinese text hanging below the roof](docs/screenshots/home.png)
+
+### Four-country overview
+
+![Four language curtains for Vietnam, China, Japan, and Kazakhstan](docs/screenshots/gallery.png)
 
 ## Run locally
 
