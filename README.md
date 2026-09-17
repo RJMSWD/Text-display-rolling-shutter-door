@@ -1,90 +1,107 @@
-# Budarina — Tactile Atlas
+# Budarina — 文字卷帘门
 
-**English** | [简体中文](README.zh-CN.md)
+**简体中文** | [English](README.en.md)
 
-An interactive architectural atlas with four language curtains and a shared travel notebook.
+让文字像布帘一样摆动的互动网站。以越南、中国、日本和哈萨克斯坦的建筑与语言为线索，结合目的地介绍和公开旅行手记。
 
-[Open the live site](https://budarina-tactile-atlas.qingyan.chatgpt.site/) · Published by **RJMSWD**
+**[打开在线体验](https://budarina-tactile-atlas.qingyan.chatgpt.site/)** · 发布者：**RJMSWD**
 
-Includes English, 简体中文, and 日本語 interfaces, interactive cloth typography, four destination pages, and a public shared notebook.
+支持 **English / 简体中文 / 日本語**，无需下载或安装即可体验。
 
-## Live experience
+## 可以做什么
 
-**[Open Budarina](https://budarina-tactile-atlas.qingyan.chatgpt.site/)** — no download or installation required.
+- **首页文字帘**：移动鼠标或触摸文字，让文字随动作摆动、自然回落。点击两侧卡片或使用左右方向键切换国家。
+- **四国总览**：点击右上角的“四国总览”，同时观看四组文字帘；点击建筑或国家名称进入单国视图。
+- **目的地**：浏览四个国家的介绍，并进入对应的文字帘。
+- **旅行社区**：阅读或发布公开旅行手记，按国家筛选，删除自己发布的手记。
+- **语言切换**：随时切换英文、中文或日文。网站会记住选择，并保留当前页面、筛选条件和未提交的留言。
 
-- **Home:** move the pointer or touch the text curtain, switch countries, or open the four-country overview.
-- **Destinations:** explore Vietnam, China, Japan, and Kazakhstan, then enter each country's text curtain.
-- **Community:** read and publish public travel notes, filter by country, and remove your own notes from the browser used to publish them.
-- **Languages:** switch between English, Chinese, and Japanese using the header selector. Your choice is remembered.
+界面文字会随语言切换；各国文字帘和访客留言保留原文。
 
-The repository contains the source code; the live link opens the working application, including the shared notebook.
+## 界面展示
 
-## Screenshots
+### 首页：建筑与文字帘
 
-### Home — interactive text curtain
+![首页：中国建筑下方的互动文字帘](docs/screenshots/home.jpg)
 
-![Budarina home with Chinese text hanging below the roof](docs/screenshots/home.jpg)
+### 四国总览
 
-### Four-country overview
+![四国总览：越南、中国、日本和哈萨克斯坦的文字帘](docs/screenshots/gallery.jpg)
 
-![Four language curtains for Vietnam, China, Japan, and Kazakhstan](docs/screenshots/gallery.jpg)
+两张截图均来自在线网站。
 
-## Run locally
+## 本地运行
 
-Use Node.js 22.13 or newer.
+需要 **Node.js 22.13 或更新版本**。
 
 ```sh
 npm ci
 npm run dev
 ```
 
-The development server prints its local URL. The site uses Next.js components through Vinext and runs on Cloudflare Workers. Existing dependencies and the lockfile are retained.
+启动后打开终端输出的本地地址。项目使用 Next.js 页面组件，通过 Vinext 构建，部署运行于 Cloudflare Workers。
 
-## Project map
+如果需要在本地使用旅行社区，还需初始化本地数据库，见下文“旅行社区与数据”。
 
-- `app/page.tsx` and `app/components/`: accessible page structure for Home, Destinations, and Community.
-- `app/globals.css`: the original atlas and gallery appearance.
-- `app/content.css`: navigation, reading pages, forms, and responsive refinements.
-- `public/app.js`: hash navigation and module initialization.
-- `public/modules/countries.js`: shared country text and roof asset paths.
-- `public/modules/atlas.js`: scene selection, layout measurements, and transitions.
-- `public/modules/cloth-engine.js`: fixed-step physics, glyph caching, and independent sleep/wake handling.
-- `public/modules/community.js`: notebook loading, filtering, publication, and removal UI.
-- `app/api/community/route.ts`: server-side validation, pagination, persistence, and ownership checks.
-- `db/schema.ts` and `drizzle/`: database schema and versioned migrations.
+## 代码结构
 
-## Animation behavior
+| 路径 | 用途 |
+| --- | --- |
+| `app/page.tsx`、`app/components/` | 首页、目的地和社区的页面结构 |
+| `app/globals.css` | 文字帘与总览界面的样式 |
+| `app/content.css` | 导航、内容页、表单、多语言及响应式样式 |
+| `public/app.js` | 页面导航与模块初始化 |
+| `public/modules/countries.js` | 国家内容、文字和建筑图片路径 |
+| `public/modules/atlas.js` | 国家切换、布局计算和过渡动画 |
+| `public/modules/cloth-engine.js` | 文字帘物理模拟、字形缓存和休眠逻辑 |
+| `public/modules/locales.js`、`i18n.js` | 三语文案、语言切换及格式化 |
+| `public/modules/community.js` | 手记加载、筛选、发布和删除交互 |
+| `app/api/community/route.ts` | 手记接口、输入校验、分页及归属检查 |
+| `db/schema.ts`、`drizzle/` | 数据库结构与迁移文件 |
 
-The simulation uses a 120 Hz fixed step with a maximum of four steps per display frame. Each curtain sleeps only after 24 consecutive quiet steps. Its final pose becomes the cached image; there is no timeout that forces nodes back to their original coordinates. Hidden pages suspend the engine. Navigation cancels obsolete transitions so an earlier animation cannot overwrite a new country selection.
+## 动画如何运行
 
-## Interface languages
+文字帘采用固定时间步长进行物理模拟，模拟频率为 120 Hz，每个显示帧最多计算四步，避免卡顿后积累过多计算。
 
-The header switches between English, Simplified Chinese, and Japanese without reloading. The browser remembers the choice. UI messages and country descriptions live in `public/modules/locales.js`; `i18n.js` updates labels, accessible text, dates, and page titles. Country glyphs and visitor-written notes retain their original language. Switching language preserves the current page, selected country, filters, and form values.
+每组文字帘独立判断是否已经稳定：连续 24 个模拟步的移动幅度足够小，才停止计算，并缓存最后的姿态。没有“到时间就强制复位”的逻辑。切换到内容页后会暂停画布；新的导航操作也会取消过期的过渡动画。
 
-## Shared notebook
+## 旅行社区与数据
 
-Notes are stored in the platform's D1 database (`DB`), not in browser storage. Everyone may read public notes. An anonymous browser generates a random management token; the server stores only its SHA-256 hash. Public API responses never expose this hash or token. Clearing browser storage removes that browser's ability to delete its notes. Removal is soft deletion. This is an account-free guestbook, not an identity-verified social network.
+公开手记保存在平台的 **D1 数据库**中，所有访客都可以阅读，不需要提供邮箱。
 
-Posts have a 500-character maximum, server-side country/name validation, a 30-second per-owner cooldown, and an idempotent submission ID. Visitor text is rendered with `textContent`, not HTML. The per-owner cooldown is a basic repeated-submit control, not comprehensive bot moderation.
+浏览器会生成一个随机管理令牌，服务端只保存其 SHA-256 摘要，用于判断访客能否删除手记。令牌不会包含在公开接口返回的数据中。
 
-For a fresh local database, build the Worker and apply the initial migration once:
+- 每则手记最多 500 个字符。
+- 服务端检查名字、内容长度和国家选项。
+- 同一管理令牌每次发布后需间隔 30 秒。
+- 重复提交使用同一个提交编号，避免生成重复手记。
+- 留言按纯文本显示，不作为 HTML 执行。
+- 删除采用软删除，手记不再对外显示。
+
+**清除浏览器数据后，将失去对原有手记的删除权限。** 这是无需账号的公开留言板；发布间隔仅用于限制重复操作，并不等于完整的防机器人或内容审核系统。
+
+### 初始化本地数据库
+
+首次使用时，先构建，再执行一次初始迁移：
 
 ```sh
 npm run build
 node node_modules/wrangler/bin/wrangler.js d1 execute DB --local --config dist/server/wrangler.json --persist-to .wrangler/state --file drizzle/0000_slim_snowbird.sql
 ```
 
-Generate future schema changes with `npm run db:generate`; never edit a migration that has already been deployed. Sites applies packaged migrations to production during publication. Local test notes are not copied to production.
+后续修改数据库结构时，使用 `npm run db:generate` 生成新迁移，不要改写已经部署过的迁移。Sites 发布时会应用打包的生产迁移；本地测试留言不会复制到线上。
 
-## Checks
+## 检查与测试
 
 ```sh
 npm test
 npm run lint
 ```
 
-Tests exercise cloth settling and suspension, then run the built Worker with an isolated D1 database to verify page structure, publication, public reads, ownership, cooldown, retries, and removal. Browser checks cover navigation, gallery interaction, the form, and narrow-screen layouts.
+测试覆盖文字帘自然稳定与暂停、三语文案及语言记忆，并使用隔离的 D1 数据库检查页面结构、公开读取、发布、归属校验、发布间隔、重复提交与删除。
 
-## Publishing
+## 部署说明
 
-`.openai/hosting.json` declares the logical database binding and intentionally omits the live site's project ID. Connect your own Sites project before publishing this checkout. The live demo is deployed separately. Publish only this project's built output; never commit credentials, `.env` files, local database state, or output archives.
+`.openai/hosting.json` 保留数据库绑定声明，不包含在线演示站点的项目 ID。如果要自行发布，请连接你自己的 Sites 项目。
+
+GitHub 仓库提供源代码，在线演示由独立站点提供。不要将 API Key、令牌、私钥、`.env`、本地数据库或打包文件提交到仓库。
