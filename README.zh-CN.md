@@ -22,11 +22,11 @@
 
 ### 首页：建筑与文字帘
 
-![首页：中国建筑下方的互动文字帘](docs/screenshots/home.png)
+![首页：中国建筑下方的互动文字帘](docs/screenshots/home.jpg)
 
 ### 四国总览
 
-![四国总览：越南、中国、日本和哈萨克斯坦的文字帘](docs/screenshots/gallery.png)
+![四国总览：越南、中国、日本和哈萨克斯坦的文字帘](docs/screenshots/gallery.jpg)
 
 两张截图均来自在线网站。
 

@@ -23,11 +23,11 @@ The repository contains the source code; the live link opens the working applica
 
 ### Home — interactive text curtain
 
-![Budarina home with Chinese text hanging below the roof](docs/screenshots/home.png)
+![Budarina home with Chinese text hanging below the roof](docs/screenshots/home.jpg)
 
 ### Four-country overview
 
-![Four language curtains for Vietnam, China, Japan, and Kazakhstan](docs/screenshots/gallery.png)
+![Four language curtains for Vietnam, China, Japan, and Kazakhstan](docs/screenshots/gallery.jpg)
 
 ## Run locally
 
